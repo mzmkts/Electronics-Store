@@ -25,4 +25,7 @@ public class Payment {
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }
