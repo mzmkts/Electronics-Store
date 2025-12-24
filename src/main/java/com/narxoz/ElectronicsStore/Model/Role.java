@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +22,7 @@ public class Role {
     private Long id;
 
     private String role;
+
+    @OneToMany(mappedBy = "role")
+    private List<User> users = new ArrayList<>();
 }
