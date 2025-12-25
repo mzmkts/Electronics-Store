@@ -14,5 +14,5 @@ public class ReviewDto {
     private Long reviewIdDto;
     private String reviewDto;
     private int ratingDto;
-    private UserDto userDto;
+    private Long userIdDto;
 }

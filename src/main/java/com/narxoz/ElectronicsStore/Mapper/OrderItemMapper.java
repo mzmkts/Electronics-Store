@@ -13,12 +13,14 @@ public interface OrderItemMapper {
 
     @Mapping(target = "orderItemIdDto", source = "id")
     @Mapping(target = "quantityDto", source = "quantity")
-    @Mapping(target = "productDto", source = "product")
+    @Mapping(target = "productIdDto", source = "product.id")
+    @Mapping(target = "orderIdDto", source = "order.id")
     OrderItemDto toDto(OrderItem orderItem);
 
     @Mapping(target = "id", source = "orderItemIdDto")
     @Mapping(target = "quantity", source = "quantityDto")
-    @Mapping(target = "product", source = "productDto")
+    @Mapping(target = "product.id", source = "productIdDto")
+    @Mapping(target = "order.id", source = "orderIdDto")
     OrderItem toEntity(OrderItemDto orderItemDto);
 
     List<OrderItemDto> toDtoList(List<OrderItem> orderItems);

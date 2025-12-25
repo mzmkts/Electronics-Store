@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class OrderItemDto {
     private Long orderItemIdDto;
-    private int quantityDto;
-    private ProductDto productDto;
+    private Integer quantityDto;
+    private Long productIdDto;
+    private Long orderIdDto;
 }

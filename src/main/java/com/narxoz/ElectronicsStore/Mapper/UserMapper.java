@@ -15,6 +15,7 @@ public interface UserMapper {
     @Mapping(target = "passwordDto", source = "password")
     @Mapping(target = "emailDto", source = "email")
     @Mapping(target = "addressDto", source = "address")
+    @Mapping(target = "roles", source = "roles")
     UserDto toDto(User user);
 
     @Mapping(target = "id", source = "userIdDto")
@@ -22,6 +23,7 @@ public interface UserMapper {
     @Mapping(target = "password", source = "passwordDto")
     @Mapping(target = "email", source = "emailDto")
     @Mapping(target = "address", source = "addressDto")
+    @Mapping(target = "roles", source = "roles")
     User toEntity(UserDto userDto);
 
     List<UserDto> toDtoList(List<User> users);
