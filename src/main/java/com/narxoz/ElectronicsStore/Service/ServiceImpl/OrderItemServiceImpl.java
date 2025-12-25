@@ -27,4 +27,9 @@ public class OrderItemServiceImpl implements OrderItemService {
     public OrderItemDto getById(Long id) {
         return orderItemMapper.toDto(orderItemRepo.findById(id).orElseThrow(() -> new RuntimeException("Order item not found with id: " + id)));
     }
+
+    @Override
+    public void addOrderItem(OrderItemDto orderItemDto) {
+        orderItemRepo.save(orderItemMapper.toEntity(orderItemDto));
+    }
 }
