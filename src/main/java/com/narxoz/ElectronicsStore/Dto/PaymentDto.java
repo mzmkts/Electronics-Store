@@ -15,4 +15,5 @@ public class PaymentDto {
     private Long paymentIdDto;
     private String paymentMethodDto;
     private LocalDateTime paymentDate;
+    private Long orderIdDto;
 }

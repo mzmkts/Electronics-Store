@@ -14,13 +14,13 @@ public interface ReviewMapper {
     @Mapping(target = "reviewIdDto", source = "id")
     @Mapping(target = "reviewDto", source = "review")
     @Mapping(target = "ratingDto", source = "rating")
-    @Mapping(target = "userDto", source = "user")
+    @Mapping(target = "userIdDto", source = "user.id")
     ReviewDto toDto(Review review);
 
     @Mapping(target = "id", source = "reviewIdDto")
     @Mapping(target = "review", source = "reviewDto")
     @Mapping(target = "rating", source = "ratingDto")
-    @Mapping(target = "user", source = "userDto")
+    @Mapping(target = "user.id", source = "userIdDto")
     Review toEntity(ReviewDto reviewDto);
 
     List<ReviewDto> toDtoList(List<Review> reviews);

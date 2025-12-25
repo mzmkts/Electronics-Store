@@ -15,7 +15,7 @@ public interface OrderMapper {
     @Mapping(target = "orderDateTime", source = "orderDateTime")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "totalAmount", source = "totalAmount")
-    @Mapping(target = "userDto", source = "user")
+    @Mapping(target = "userDtoId", source = "user.id")
     @Mapping(target = "orderItemDto", source = "orderItem")
     @Mapping(target = "paymentsDto", source = "payments")
     OrderDto toDto(Order order);
@@ -24,7 +24,7 @@ public interface OrderMapper {
     @Mapping(target = "orderDateTime", source = "orderDateTime")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "totalAmount", source = "totalAmount")
-    @Mapping(target = "user", source = "userDto")
+    @Mapping(target = "user.id", source = "userDtoId")
     @Mapping(target = "orderItem", source = "orderItemDto")
     @Mapping(target = "payments", source = "paymentsDto")
     Order toEntity(OrderDto orderDto);
