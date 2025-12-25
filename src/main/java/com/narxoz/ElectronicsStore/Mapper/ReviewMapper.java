@@ -6,6 +6,8 @@ import com.narxoz.ElectronicsStore.Model.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", uses = {UserMapper.class, ProductMapper.class})
 public interface ReviewMapper {
 
@@ -20,4 +22,6 @@ public interface ReviewMapper {
     @Mapping(target = "rating", source = "ratingDto")
     @Mapping(target = "user", source = "userDto")
     Review toEntity(ReviewDto reviewDto);
+
+    List<ReviewDto> toDtoList(List<Review> reviews);
 }
