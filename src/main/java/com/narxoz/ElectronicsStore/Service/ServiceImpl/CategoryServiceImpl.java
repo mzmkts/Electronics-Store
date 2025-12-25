@@ -37,11 +37,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategory(Long id, CategoryDto categoryDto) {
+    public void updateCategory(Long id, CategoryDto categoryDto) {
         Category existCategory = categoryRepo.findById(id).orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
         existCategory.setCategoryName(categoryDto.getCategoryNameDto());
 
-        return categoryRepo.save(existCategory);
+        categoryRepo.save(existCategory);
     }
 
     @Override
