@@ -2,6 +2,7 @@ package com.narxoz.ElectronicsStore.Service;
 
 
 import com.narxoz.ElectronicsStore.Dto.ReviewDto;
+import com.narxoz.ElectronicsStore.Model.User;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface ReviewService {
 
     ReviewDto getById(Long id);
 
-    void addReview(ReviewDto reviewDto);
+    void addReview(Long productId, User user, ReviewDto reviewDto);
 
     void updateReview(Long id, ReviewDto reviewDto);
 
