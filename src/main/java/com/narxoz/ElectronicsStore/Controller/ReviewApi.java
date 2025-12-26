@@ -7,6 +7,7 @@ import com.narxoz.ElectronicsStore.Service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,12 +15,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ReviewApi {
     private final ReviewService reviewService;
     private final UserRepo userRepo;
 
-    @GetMapping
+    @PreAuthorize("hasAnyRole('admin', 'manager')")
+    @GetMapping("/reviews")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(reviewService.getAll(), HttpStatus.OK);
     }
@@ -29,6 +31,7 @@ public class ReviewApi {
         return new ResponseEntity<>(reviewService.getById(productsId), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin', 'manager', 'user')")
     @PostMapping("/reviews/{productsId}/{userId}")
     public ResponseEntity<?> addReview(@PathVariable Long productsId, @PathVariable Long userId, @RequestBody ReviewDto reviewDto) {
         User user = userRepo.findById(userId).orElseThrow();
@@ -38,12 +41,14 @@ public class ReviewApi {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin', 'manager', 'user')")
     @PutMapping("/reviews/{id}")
     public ResponseEntity<?> updateReview(@PathVariable Long id, @RequestBody ReviewDto reviewDto) {
         reviewService.updateReview(id, reviewDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin', 'manager','user')")
     @DeleteMapping("/reviews/{id}")
     public ResponseEntity<?> deleteReview(@PathVariable Long id) {
         reviewService.deleteReview(id);
