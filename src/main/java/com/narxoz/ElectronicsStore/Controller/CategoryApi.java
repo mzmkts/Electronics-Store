@@ -5,6 +5,7 @@ import com.narxoz.ElectronicsStore.Service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/category")
 public class CategoryApi {
     private final CategoryService categoryService;
+
+    @PreAuthorize("hasRole('admin')")
     @GetMapping
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(categoryService.getAll(), HttpStatus.OK);
@@ -22,18 +25,21 @@ public class CategoryApi {
         return new ResponseEntity<>(categoryService.getById(id), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin')")
     @PostMapping
     public ResponseEntity<?> addCategory(@RequestBody CategoryDto categoryDto) {
         categoryService.addCategory(categoryDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin')")
     @PutMapping
-    public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto){
+    public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDto) {
         categoryService.updateCategory(id, categoryDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAnyRole('admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategory(id);

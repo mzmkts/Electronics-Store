@@ -11,7 +11,7 @@ public interface UserService {
 
     UserDto getById(Long id);
 
-    void registr(User user);
+    void registr(UserDto userDto);
 
     void updateUser(Long id, User user);
 

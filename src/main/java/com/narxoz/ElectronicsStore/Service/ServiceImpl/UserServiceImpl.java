@@ -45,15 +45,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void registr(User user) {
-        User check = userRepo.getByEmail(user.getEmail());
-        if(check == null) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            List<Role> roles =List.of(roleRepo.getRoleByName("user"));
+    public void registr(UserDto userDto) {
+        User check = userRepo.getByEmail(userDto.getEmailDto());
+        if (check == null) {
+            String encodedPassword = passwordEncoder.encode(userDto.getPasswordDto());
+            List<Role> roles = List.of(roleRepo.getRoleByName("user"));
+            User user = new User();
+            user.setEmail(userDto.getEmailDto());
+            user.setUsername(userDto.getUsernameDto());
+            user.setPassword(encodedPassword);
+            user.setAddress(userDto.getAddressDto());
             user.setRoles(roles);
+
+
             userRepo.save(user);
-        }else{
-            throw new UsernameNotFoundException("User already exits");
+        } else {
+            throw new UsernameNotFoundException("User already exists");
         }
     }
 

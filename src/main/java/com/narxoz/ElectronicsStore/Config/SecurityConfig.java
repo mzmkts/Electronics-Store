@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .passwordEncoder(passwordEncoder());
 
         http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/auth/user/**").permitAll()
                 .anyRequest().authenticated()
         );
         http.httpBasic(Customizer.withDefaults());
