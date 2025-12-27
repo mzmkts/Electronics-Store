@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres
+    image: postgres:18
     container_name: electronics_db
     environment:
       POSTGRES_USER: postgres
@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ElectronicsStore
     ports:
       - "5432:5432"
+    volumes:
+      - electronicsstore_pgdata:/var/lib/postgresql
 
   app:
     build: .
@@ -15,11 +17,14 @@ services:
     depends_on:
       - db
     environment:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ElectronicsStore
-        SPRING_DATASOURCE_USERNAME: postgres
-        SPRING_DATASOURCE_PASSWORD: postgres
-        SPRING_JPA_HIBERNATE_DDL_AUTO: update
-        SPRING_JPA_SHOW_SQL: "true"
-        SPRING_APPLICATION_NAME: ElectronicsStore
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ElectronicsStore
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_APPLICATION_NAME: ElectronicsStore
     ports:
       - "8080:8080"
+
+volumes:
+  electronicsstore_pgdata:
